@@ -7,9 +7,8 @@
 #include "UtilsCommon.h"
 #include "PlayerCharacter.generated.h"
 
-/**
- * 
- */
+class APlayerMovementPoint;
+
 UCLASS()
 class HALLOUEM_API APlayerCharacter : public APaperCharacter
 {
@@ -18,6 +17,8 @@ class HALLOUEM_API APlayerCharacter : public APaperCharacter
 public:
 	APlayerCharacter();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+		void Init();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 	void MoveLeft();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
@@ -39,5 +40,8 @@ public:
 		EnumPowerUpType CurrentPowerUp;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
 		EnumFuckUpType	CurrentFuckUpType;
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerCharacter")
+		TArray<APlayerMovementPoint*> MovementPoints;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+		int32 CurrentMovementPointIndex;
 };

@@ -31,7 +31,7 @@ void APlayerManager::Tick(float DeltaTime)
 
 void APlayerManager::P1_MoveRight()
 {
-	P1_VALID
+	//P1_VALID
 	{
 		Player1->MoveRight();
 	}
@@ -39,7 +39,13 @@ void APlayerManager::P1_MoveRight()
 
 void APlayerManager::P1_MoveLeft()
 {
-	P1_VALID
+	//P1_VALID
+
+	/*
+	
+		Chacho, me estaba dando todo el rato null al pulsar la tecla izquierda, supongo que me abre dejado algo
+	*/
+	if(Player1->IsValidLowLevel() && !Player1->IsPendingKill())
 	{
 		Player1->MoveLeft();
 	}
@@ -47,7 +53,7 @@ void APlayerManager::P1_MoveLeft()
 
 void APlayerManager::P1_PowerUp()
 {
-	P1_VALID
+	//P1_VALID
 	{
 		Player1->PowerUp();
 	}
@@ -55,7 +61,7 @@ void APlayerManager::P1_PowerUp()
 
 void APlayerManager::P1_FuckedUp()
 {
-	P1_VALID
+	//P1_VALID
 	{
 		Player1->FuckedUp();
 	}

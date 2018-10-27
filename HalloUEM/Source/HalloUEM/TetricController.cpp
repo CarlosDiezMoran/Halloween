@@ -12,7 +12,7 @@ ATetricController::ATetricController() : Super()
 void ATetricController::BeginPlayingState()
 {
 	Super::BeginPlayingState();
-	
+	SetStandardState();
 }
 
 void ATetricController::Tick(float DeltaSeconds)
@@ -44,7 +44,7 @@ EnumState ATetricController::GetCurrentState()
 
 void ATetricController::P1_MoveRight()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P1_MoveRight();
 	}
@@ -52,7 +52,7 @@ void ATetricController::P1_MoveRight()
 
 void ATetricController::P1_MoveLeft()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P1_MoveLeft();
 	}
@@ -60,7 +60,7 @@ void ATetricController::P1_MoveLeft()
 
 void ATetricController::P1_PowerUp()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P1_PowerUp();
 	}
@@ -68,7 +68,7 @@ void ATetricController::P1_PowerUp()
 
 void ATetricController::P1_FuckedUp()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P1_FuckedUp();
 	}
@@ -76,7 +76,7 @@ void ATetricController::P1_FuckedUp()
 
 void ATetricController::P2_MoveRight()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P2_MoveRight();
 	}
@@ -84,7 +84,7 @@ void ATetricController::P2_MoveRight()
 
 void ATetricController::P2_MoveLeft()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P2_MoveLeft();
 	}
@@ -92,7 +92,7 @@ void ATetricController::P2_MoveLeft()
 
 void ATetricController::P2_PowerUp()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P2_PowerUp();
 	}
@@ -100,7 +100,7 @@ void ATetricController::P2_PowerUp()
 
 void ATetricController::P2_FuckedUp()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->P2_FuckedUp();
 	}
@@ -109,7 +109,7 @@ void ATetricController::P2_FuckedUp()
 
 void ATetricController::MenuUp()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuUp();
 	}
@@ -117,7 +117,7 @@ void ATetricController::MenuUp()
 
 void ATetricController::MenuDown()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuDown();
 	}
@@ -125,7 +125,7 @@ void ATetricController::MenuDown()
 
 void ATetricController::MenuRight()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuRight();
 	}
@@ -133,7 +133,7 @@ void ATetricController::MenuRight()
 
 void ATetricController::MenuLeft()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuLeft();
 	}
@@ -141,7 +141,7 @@ void ATetricController::MenuLeft()
 
 void ATetricController::MenuSelect()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuSelect();
 	}
@@ -149,7 +149,7 @@ void ATetricController::MenuSelect()
 
 void ATetricController::MenuCancel()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->MenuCancel();
 	}
@@ -157,7 +157,7 @@ void ATetricController::MenuCancel()
 
 void ATetricController::PauseGame()
 {
-	MANAGERVALID
+	//MANAGERVALID
 	{
 		PlayerManager->PauseGame();
 	}

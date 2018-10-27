@@ -4,7 +4,7 @@
 
 
 // Sets default values for this component's properties
-UPiece::UPiece()
+UPiece::UPiece() : Super()
 {
 
 }

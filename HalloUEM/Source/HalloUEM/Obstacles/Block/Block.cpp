@@ -4,7 +4,7 @@
 
 
 // Sets default values
-ABlock::ABlock()
+ABlock::ABlock() : Super()
 {	
 	Entrances = { false, false, false, false, false, false, false };
 	Exits = { false, false, false, false, false, false, false };

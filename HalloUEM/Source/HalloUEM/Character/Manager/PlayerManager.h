@@ -55,9 +55,11 @@ protected:
 	virtual void BeginPlay() override;
 
 
-private:
+public:
 
-	APlayerCharacter * Player1;
-	APlayerCharacter * Player2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manager")
+		APlayerCharacter * Player1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manager")
+		APlayerCharacter * Player2;
 	
 };

@@ -2,15 +2,19 @@
 
 #include "PlayerCharacter.h"
 
-APlayerCharacter::APlayerCharacter() 
+APlayerCharacter::APlayerCharacter() : Super()
 {
 }
 
 void APlayerCharacter::BeginPlay() 
 {
+	Super::BeginPlay();
 }
 
+void APlayerCharacter::Init_Implementation()
+{
 
+}
 void APlayerCharacter::MoveLeft_Implementation() 
 {
 
