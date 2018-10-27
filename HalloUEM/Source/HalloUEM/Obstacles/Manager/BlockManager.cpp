@@ -25,15 +25,12 @@ void ABlockManager::BeginPlay()
 
 	//Timer Generacion Bloques
 	TimerDel.BindUFunction(this, FName("AddBlock"));
-	//Calling MyUsefulFunction after 5 seconds without looping
 	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
 
-	/*
+
 	//Timer Control Nivel
-	TimerDel.BindUFunction(this, FName("IncreaseLevel"));
-	//Calling MyUsefulFunction after 5 seconds without looping
-	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
-	*/
+	TimerDelLevel.BindUFunction(this, FName("IncreaseLevel"));
+	GetWorldTimerManager().SetTimer(TimerHandleLevel, TimerDelLevel, TimeToChangeLevel, true);
 }
 
 // Called every frame
@@ -123,11 +120,13 @@ void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPrevious
 
 void ABlockManager::IncreaseLevel()
 {
-	BaseSpeed *= DifficultyMultiplier;
-	CurrentLevel++;
-
-	switch (CurrentLevel) 
+	if (MaxLevel > CurrentLevel) 
 	{
+		BaseSpeed *= DifficultyMultiplier;
+		CurrentLevel++;
+
+		switch (CurrentLevel)
+		{
 		case 1:
 			CurrentBlockList.Append(BlockList_1);
 			break;
@@ -141,6 +140,7 @@ void ABlockManager::IncreaseLevel()
 		case 4:
 			CurrentBlockList.Append(BlockList_4);
 			break;
+		}
 	}
 }
 
