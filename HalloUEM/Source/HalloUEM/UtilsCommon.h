@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Public/TimerManager.h"
+#include "Runtime/Engine/Classes/Components/SceneComponent.h"
 
 
 UENUM(BlueprintType)

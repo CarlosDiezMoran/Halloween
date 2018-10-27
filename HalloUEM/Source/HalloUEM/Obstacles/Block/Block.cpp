@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Block.h"
-#include "Obstacles/Piece/Piece.h"
+#include "UtilsCommon.h"
 
 
 // Sets default values
@@ -9,13 +9,13 @@ ABlock::ABlock() : Super()
 {	
 	Entrances = { false, false, false, false, false, false, false };
 	Exits = { false, false, false, false, false, false, false };
+
+	MyRoot = CreateDefaultSubobject<USceneComponent>(TEXT("MyRoot"));
+	MyRoot->SetVisibility(true);
+	SetRootComponent(MyRoot);
 }
 
 void ABlock::OnConstruction(const FTransform & Transform)
-{
-}
-
-void ABlock::InitBlock_Implementation(int32 index, EnumPieceType Type)
 {
 }
 
