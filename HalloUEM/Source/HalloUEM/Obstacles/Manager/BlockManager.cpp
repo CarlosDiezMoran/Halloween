@@ -3,6 +3,7 @@
 #include "BlockManager.h"
 #include "UtilsCommon.h"
 #include "Obstacles/Block/Block.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 
 
 // Sets default values
@@ -17,6 +18,9 @@ ABlockManager::ABlockManager()
 void ABlockManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//Le meto los blocks de level 0 al inicio
+	CurrentBlockList.Append(BlockList_0);
 	
 }
 
@@ -42,14 +46,48 @@ void ABlockManager::DestroyBlock(ABlock * BlockToDestroy)
 void ABlockManager::AddBlock()
 {
 	int32 LenghtBlockList = CurrentBlockList.Num();
+	int32 NumCurrentSpawnedBlocks = CurrentSpawnedBlocks.Num();
 	int32 SelectedIndex = -1;
 
 	while (SelectedIndex == -1)
 	{
+		bool CanSpawn = false;
 		float RandNumber = FMath::RandRange(0.f, (float)LenghtBlockList);
 		SelectedIndex = RandNumber;
 		//BlockList[CurrentLevel][SelectedIndex]
-		CurrentBlockList[SelectedIndex];
+
+
+		
+		if (NumCurrentSpawnedBlocks > 0) 
+		{
+			float Dist = CurrentSpawnedBlocks[CurrentSpawnedBlocks.Num() - 1]->GetDistanceTo(SpawningLocation);
+			
+			//Si la distancia es < 0 no hacemos spawn
+			if (Dist < 500.f) 
+			{
+				SelectedIndex = -2;
+			}
+			else 
+			{
+				CanSpawn = true;
+			}
+		}
+		else 
+		{
+			CanSpawn = true;
+		}
+		
+		if (CanSpawn) 
+		{
+
+			FActorSpawnParameters SpawnInfo;
+			SpawnInfo.Owner = this;
+			FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector*50.f);
+			FRotator Rotation(0.0f, 90.0f, -90.0f);
+
+			ABlock* NewBlock = GetWorld()->SpawnActor<ABlock>(CurrentBlockList[SelectedIndex], Location, Rotation, SpawnInfo);
+			CurrentSpawnedBlocks.Add(NewBlock);
+		}
 	}
 
 	//while has not been added
@@ -61,10 +99,6 @@ void ABlockManager::AddBlock()
 	//Check if entrace == exit
 
 	//add it
-
-
-
-
  }
 
 void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPreviousSpeed)
@@ -80,5 +114,23 @@ void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPrevious
 void ABlockManager::IncreaseLevel()
 {
 	BaseSpeed *= DifficultyMultiplier;
+	CurrentLevel++;
+
+	switch (CurrentLevel) 
+	{
+		case 1:
+			CurrentBlockList.Append(BlockList_1);
+			break;
+		case 2:
+			CurrentBlockList.Append(BlockList_2);
+
+			break;
+		case 3:
+			CurrentBlockList.Append(BlockList_3);
+			break;
+		case 4:
+			CurrentBlockList.Append(BlockList_4);
+			break;
+	}
 }
 

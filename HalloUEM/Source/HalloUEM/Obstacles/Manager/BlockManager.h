@@ -41,19 +41,33 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 CurrentLevel = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Blocks")
-		int32 BaseSpeed = 0;
+		int32 BaseSpeed = -50;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 DistanceBetweenBlocks = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<ABlock*> CurrentSpawnedBlocks;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<TSubclassOf<ABlock>> CurrentBlockList;
+	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<FLevelBlockManager> BlockList;
+		*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABlock>> BlockList_0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABlock>> BlockList_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABlock>> BlockList_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABlock>> BlockList_3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABlock>> BlockList_4;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 DifficultyMultiplier = 2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 NumberOfBlocksToPowerUp = 5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		AActor* SpawningLocation;
 
 private:
 	UPROPERTY(VisibleAnywhere)
