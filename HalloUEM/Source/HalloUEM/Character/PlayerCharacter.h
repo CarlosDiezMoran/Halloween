@@ -14,7 +14,15 @@ class HALLOUEM_API APlayerCharacter : public APaperCharacter
 {
 	GENERATED_BODY()
 	
-	
+public:
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	void MoveLeft();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	void MoveRight();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	void PowerUp();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	void FuckedUp();
 	
 	
 };
