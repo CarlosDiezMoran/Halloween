@@ -5,10 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "UtilsCommon.h"
-
 #include "TetricController.generated.h"
 
-
+class APlayerManager;
 /**
  * 
  */
@@ -27,42 +26,31 @@ public:
 		void SetState(EnumState State);
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 		EnumState GetCurrentState();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P1_MoveRight();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P1_MoveLeft();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P1_PowerUp();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P1_FuckedUp();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P2_MoveRight();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P2_MoveLeft();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P2_PowerUp();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void P2_FuckedUp();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void Pause();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuUp();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuDown();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuRight();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuLeft();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuSelect();
-	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
-		void MenuCancel();
+
 private:
+	//Set States
 	void SetNoneState();
 	void SetStandardState();
 	void SetMenuState();
 
+	//Binding functions
+	void P1_MoveRight();
+	void P1_MoveLeft();
+	void P1_PowerUp();
+	void P1_FuckedUp();
+	void P2_MoveRight();
+	void P2_MoveLeft();
+	void P2_PowerUp();
+	void P2_FuckedUp();
+	void MenuUp();
+	void MenuDown();
+	void MenuRight();
+	void MenuLeft();
+	void MenuSelect();
+	void MenuCancel();
+	void PauseGame();
 private:
 	EnumState CurrentState;
+	APlayerManager* PlayerManager;
 
 };
