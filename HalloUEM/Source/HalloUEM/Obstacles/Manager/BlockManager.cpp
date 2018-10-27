@@ -25,6 +25,12 @@ void ABlockManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	for (ABlock* Block : CurrentSpawnedBlocks) 
+	{
+		FVector CurrentLocation = Block->GetActorLocation();
+		CurrentLocation.X -= DeltaTime * BaseSpeed;
+		Block->SetActorLocation(CurrentLocation);
+	}
 }
 
 void ABlockManager::DestroyBlock(ABlock * BlockToDestroy)
@@ -35,6 +41,17 @@ void ABlockManager::DestroyBlock(ABlock * BlockToDestroy)
 
 void ABlockManager::AddBlock()
 {
+	int32 LenghtBlockList = CurrentBlockList.Num();
+	int32 SelectedIndex = -1;
+
+	while (SelectedIndex == -1)
+	{
+		float RandNumber = FMath::RandRange(0.f, (float)LenghtBlockList);
+		SelectedIndex = RandNumber;
+		//BlockList[CurrentLevel][SelectedIndex]
+		CurrentBlockList[SelectedIndex];
+	}
+
 	//while has not been added
 
 	//Select Random Block
@@ -44,6 +61,10 @@ void ABlockManager::AddBlock()
 	//Check if entrace == exit
 
 	//add it
+
+
+
+
  }
 
 void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPreviousSpeed)
@@ -54,5 +75,10 @@ void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPrevious
 	//--
 	//set new speed
 	//set timer if time != 0
+}
+
+void ABlockManager::IncreaseLevel()
+{
+	BaseSpeed *= DifficultyMultiplier;
 }
 
