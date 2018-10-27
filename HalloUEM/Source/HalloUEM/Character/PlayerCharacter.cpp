@@ -16,20 +16,24 @@ void APlayerCharacter::Die_Implementation()
 
 void APlayerCharacter::StepBack()
 {
-	for(APlayerMovementPoint* Positions: MovementPoints)
-	{
-		Positions->AddActorLocalOffset(FVector::ForwardVector*GRIDDISTANCE);
-	}
-	SetPlayerLocationByIndex(CurrentMovementPointIndex);
-	--NumberOfLifes;
-	if(NumberOfLifes<0)
-	{
-		Die();
+	if (!bIsInvulnerable) {
+		for (APlayerMovementPoint* Positions : MovementPoints)
+		{
+			Positions->AddActorLocalOffset(FVector::ForwardVector*GRIDDISTANCE);
+		}
+		SetPlayerLocationByIndex(CurrentMovementPointIndex);
+		MakeInvulnerable(true);
+		--NumberOfLifes;
+		if (NumberOfLifes < 0)
+		{
+			Die();
+		}
 	}
 }
 
 void APlayerCharacter::StepForward()
 {
+	MakeInvulnerable(false);
 	if (NumberOfLifes < 3)
 	{
 		++NumberOfLifes;
@@ -41,6 +45,10 @@ void APlayerCharacter::StepForward()
 
 	}
 }
+
+/*void APlayerCharacter::MakeInvulnerable_Implementation()
+{
+}*/
 
 void APlayerCharacter::BeginPlay()
 {

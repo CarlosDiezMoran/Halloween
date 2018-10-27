@@ -33,7 +33,10 @@ public:
 		void StepBack();
 	UFUNCTION(BlueprintCallable, Category = "Damaged")
 		void StepForward();
-
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void MakeInvulnerable(bool bHasBeenDamaged);
+	UFUNCTION(BlueprintCallable,BlueprintImplementableEvent)
+		void MakeVulnerable();
 
 
 protected:
@@ -41,7 +44,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	//Checks if the array is valid and moves the player
 	void SetPlayerLocationByIndex(int32 Index);
-	
+
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PowerUp")
@@ -56,4 +59,8 @@ public:
 		int32 MovementPointsSize;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 		int32 NumberOfLifes = 3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
+		bool bIsInvulnerable = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
+		float TimeToBeVulnerableAgain = 1.5f;
 };
