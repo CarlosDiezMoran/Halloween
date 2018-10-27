@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PaperCharacter.h"
+#include "UtilsCommon.h"
 #include "PlayerCharacter.generated.h"
 
 /**
@@ -15,6 +16,8 @@ class HALLOUEM_API APlayerCharacter : public APaperCharacter
 	GENERATED_BODY()
 	
 public:
+	APlayerCharacter();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 	void MoveLeft();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
@@ -24,5 +27,17 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 	void FuckedUp();
 	
+
+
+
+protected:
+	virtual void BeginPlay() override;
+	
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+		EnumPowerUpType CurrentPowerUp;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+		EnumFuckUpType	CurrentFuckUpType;
 	
 };

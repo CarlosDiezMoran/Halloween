@@ -2,6 +2,14 @@
 
 #include "PlayerCharacter.h"
 
+APlayerCharacter::APlayerCharacter() 
+{
+}
+
+void APlayerCharacter::BeginPlay() 
+{
+}
+
 
 void APlayerCharacter::MoveLeft_Implementation() 
 {
