@@ -2,6 +2,7 @@
 
 #include "TetricController.h"
 #include "Character/Manager/PlayerManager.h"
+#include "Character/PlayerCharacter.h"
 #include "UtilsCommon.h"
 
  
@@ -13,7 +14,7 @@ void ATetricController::BeginPlayingState()
 {
 	Super::BeginPlayingState();
 	PlayerManager = Cast<APlayerManager>(GetPawn());
-	SetStandardState();
+	SetState(EnumState::STANDARD);
 }
 
 void ATetricController::Tick(float DeltaSeconds)
@@ -23,6 +24,13 @@ void ATetricController::Tick(float DeltaSeconds)
 void ATetricController::SetState(EnumState State)
 {
 	this->InputComponent->ClearActionBindings();
+
+	this->InputComponent->BindAction("DEBUG1", EInputEvent::IE_Released, this, &ATetricController::DebugFunction1);
+	this->InputComponent->BindAction("DEBUG2", EInputEvent::IE_Released, this, &ATetricController::DebugFunction2);
+	this->InputComponent->BindAction("DEBUG3", EInputEvent::IE_Released, this, &ATetricController::DebugFunction3);
+	this->InputComponent->BindAction("DEBUG4", EInputEvent::IE_Released, this, &ATetricController::DebugFunction4);
+
+
 	switch(State)
 	{
 	case EnumState::NONE:
@@ -54,6 +62,30 @@ APlayerManager* ATetricController::GetPlayerManager()
 	}
 }
 
+void ATetricController::DebugFunction1_Implementation()
+{
+	if (PlayerManager->IsValidLowLevel())
+	{
+		PlayerManager->Player1->StepBack();
+	}
+}
+
+void ATetricController::DebugFunction2_Implementation()
+{
+	if (PlayerManager->IsValidLowLevel())
+	{
+		PlayerManager->Player1->StepForward();
+	}
+}
+
+
+void ATetricController::DebugFunction3_Implementation()
+{
+}
+
+void ATetricController::DebugFunction4_Implementation()
+{
+}
 
 
 void ATetricController::P1_MoveRight()
@@ -176,6 +208,8 @@ void ATetricController::PauseGame()
 		PlayerManager->PauseGame();
 	}
 }
+
+
 
 void ATetricController::SetNoneState()
 {

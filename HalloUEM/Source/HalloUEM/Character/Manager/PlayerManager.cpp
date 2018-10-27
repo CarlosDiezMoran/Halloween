@@ -40,12 +40,6 @@ void APlayerManager::P1_MoveRight()
 void APlayerManager::P1_MoveLeft()
 {
 	if(Player1->IsValidLowLevel())
-
-	/*
-	
-		Chacho, me estaba dando todo el rato null al pulsar la tecla izquierda, supongo que me abre dejado algo
-	*/
-	if(Player1->IsValidLowLevel() && !Player1->IsPendingKill())
 	{
 		Player1->MoveLeft();
 	}

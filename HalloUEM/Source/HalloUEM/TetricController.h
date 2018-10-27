@@ -28,6 +28,21 @@ public:
 		EnumState GetCurrentState();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 		APlayerManager* GetPlayerManager();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Debug Function")
+		void DebugFunction1();
+	virtual void DebugFunction1_Implementation();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Debug Function")
+		void DebugFunction2();
+	virtual void DebugFunction2_Implementation();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Debug Function")
+		void DebugFunction3();
+	virtual void DebugFunction3_Implementation();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Debug Function")
+		void DebugFunction4();
+	virtual void DebugFunction4_Implementation();
+
 private:
 	//Set States
 	void SetNoneState();

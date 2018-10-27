@@ -27,21 +27,33 @@ public:
 	void PowerUp();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 	void FuckedUp();
-	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+		void Die();
+	UFUNCTION(BlueprintCallable, Category = "Damaged")
+		void StepBack();
+	UFUNCTION(BlueprintCallable, Category = "Damaged")
+		void StepForward();
 
 
 
 protected:
 	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintCallable)
+	//Checks if the array is valid and moves the player
+	void SetPlayerLocationByIndex(int32 Index);
 	
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PowerUp")
 		EnumPowerUpType CurrentPowerUp;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PowerUp")
 		EnumFuckUpType	CurrentFuckUpType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerCharacter")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 		TArray<APlayerMovementPoint*> MovementPoints;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCharacter")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 		int32 CurrentMovementPointIndex;
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+		int32 MovementPointsSize;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+		int32 NumberOfLifes = 3;
 };
