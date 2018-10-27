@@ -2,6 +2,14 @@
 
 #include "AbilityProp.h"
 
+AAbilityProp::AAbilityProp()
+{
+
+}
+
+void AAbilityProp::BeginPlay() 
+{
+}
 
 
 

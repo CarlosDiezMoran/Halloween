@@ -4,3 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Public/TimerManager.h"
+
+UENUM(BlueprintType)
+enum class EnumPowerUpType : uint8 {
+	NONE,
+	DASH,
+	SLOW,
+	SHOOT
+};
+
+enum class EnumFuckUpType : uint8 {
+	NONE,
+	SPEED,
+	GHOST,
+	BLIND
+};
