@@ -2,6 +2,10 @@
 
 #include "PlayerCharacter.h"
 
+APlayerCharacter::APlayerCharacter() 
+{
+}
 
-
-
+void APlayerCharacter::BeginPlay() 
+{
+}

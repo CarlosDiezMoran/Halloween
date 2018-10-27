@@ -21,6 +21,7 @@ enum class EnumPowerUpType : uint8 {
 	SHOOT
 };
 
+UENUM(BlueprintType)
 enum class EnumFuckUpType : uint8 {
 	NONE,
 	SPEED,

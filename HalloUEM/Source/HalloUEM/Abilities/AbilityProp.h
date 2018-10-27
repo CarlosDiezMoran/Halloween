@@ -4,10 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "PaperSpriteActor.h"
+#include "UtilsCommon.h"
 #include "AbilityProp.generated.h"
-
-enum class EnumPowerUpType;
-enum class EnumFuckUpType;
 
 
 UCLASS()
@@ -23,7 +21,9 @@ protected:
 
 public:
 
-	EnumPowerUpType PowerUpType;
-	EnumFuckUpType	EnumFuckUpType;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilityProp")
+		EnumPowerUpType PowerUpType;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilityProp")
+		EnumFuckUpType	EnumFuckUpType;
 	
 };
