@@ -4,7 +4,7 @@
 #include "Character/Manager/PlayerManager.h"
 #include "UtilsCommon.h"
 
-#define MANAGERVALID if(PlayerManager->IsValidLowLevel())
+ 
 
 ATetricController::ATetricController() : Super()
 {
@@ -12,6 +12,7 @@ ATetricController::ATetricController() : Super()
 void ATetricController::BeginPlayingState()
 {
 	Super::BeginPlayingState();
+	PlayerManager = Cast<APlayerManager>(GetPawn());
 	SetStandardState();
 }
 
@@ -42,9 +43,22 @@ EnumState ATetricController::GetCurrentState()
 	return CurrentState;
 }
 
+APlayerManager* ATetricController::GetPlayerManager()
+{
+	if(PlayerManager->IsValidLowLevel())
+	{
+		return PlayerManager;
+	}else
+	{
+		return nullptr;
+	}
+}
+
+
+
 void ATetricController::P1_MoveRight()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P1_MoveRight();
 	}
@@ -52,7 +66,7 @@ void ATetricController::P1_MoveRight()
 
 void ATetricController::P1_MoveLeft()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P1_MoveLeft();
 	}
@@ -60,7 +74,7 @@ void ATetricController::P1_MoveLeft()
 
 void ATetricController::P1_PowerUp()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P1_PowerUp();
 	}
@@ -68,7 +82,7 @@ void ATetricController::P1_PowerUp()
 
 void ATetricController::P1_FuckedUp()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P1_FuckedUp();
 	}
@@ -76,7 +90,7 @@ void ATetricController::P1_FuckedUp()
 
 void ATetricController::P2_MoveRight()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P2_MoveRight();
 	}
@@ -84,7 +98,7 @@ void ATetricController::P2_MoveRight()
 
 void ATetricController::P2_MoveLeft()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P2_MoveLeft();
 	}
@@ -92,7 +106,7 @@ void ATetricController::P2_MoveLeft()
 
 void ATetricController::P2_PowerUp()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P2_PowerUp();
 	}
@@ -100,7 +114,7 @@ void ATetricController::P2_PowerUp()
 
 void ATetricController::P2_FuckedUp()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->P2_FuckedUp();
 	}
@@ -109,7 +123,7 @@ void ATetricController::P2_FuckedUp()
 
 void ATetricController::MenuUp()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuUp();
 	}
@@ -117,7 +131,7 @@ void ATetricController::MenuUp()
 
 void ATetricController::MenuDown()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuDown();
 	}
@@ -125,7 +139,7 @@ void ATetricController::MenuDown()
 
 void ATetricController::MenuRight()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuRight();
 	}
@@ -133,7 +147,7 @@ void ATetricController::MenuRight()
 
 void ATetricController::MenuLeft()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuLeft();
 	}
@@ -141,7 +155,7 @@ void ATetricController::MenuLeft()
 
 void ATetricController::MenuSelect()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuSelect();
 	}
@@ -149,7 +163,7 @@ void ATetricController::MenuSelect()
 
 void ATetricController::MenuCancel()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->MenuCancel();
 	}
@@ -157,7 +171,7 @@ void ATetricController::MenuCancel()
 
 void ATetricController::PauseGame()
 {
-	//MANAGERVALID
+	if(PlayerManager->IsValidLowLevel())
 	{
 		PlayerManager->PauseGame();
 	}

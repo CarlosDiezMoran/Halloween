@@ -26,7 +26,8 @@ public:
 		void SetState(EnumState State);
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 		EnumState GetCurrentState();
-
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+		APlayerManager* GetPlayerManager();
 private:
 	//Set States
 	void SetNoneState();

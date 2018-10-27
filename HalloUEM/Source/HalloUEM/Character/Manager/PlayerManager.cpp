@@ -3,9 +3,9 @@
 #include "PlayerManager.h"
 #include "Character/PlayerCharacter.h"
 
-#define P1_VALID  if(Player1->IsValidLowLevel())
-#define P2_VALID  if(Player2->IsValidLowLevel())
-#define P12_VALID if(Player1->IsValidLowLevel() && Player2->IsValidLowLevel())
+
+
+
 
 // Sets default values
 APlayerManager::APlayerManager()
@@ -31,7 +31,7 @@ void APlayerManager::Tick(float DeltaTime)
 
 void APlayerManager::P1_MoveRight()
 {
-	//P1_VALID
+	if(Player1->IsValidLowLevel())
 	{
 		Player1->MoveRight();
 	}
@@ -39,7 +39,7 @@ void APlayerManager::P1_MoveRight()
 
 void APlayerManager::P1_MoveLeft()
 {
-	//P1_VALID
+	if(Player1->IsValidLowLevel())
 
 	/*
 	
@@ -53,7 +53,7 @@ void APlayerManager::P1_MoveLeft()
 
 void APlayerManager::P1_PowerUp()
 {
-	//P1_VALID
+	if(Player1->IsValidLowLevel())
 	{
 		Player1->PowerUp();
 	}
@@ -61,7 +61,7 @@ void APlayerManager::P1_PowerUp()
 
 void APlayerManager::P1_FuckedUp()
 {
-	//P1_VALID
+	if(Player1->IsValidLowLevel())
 	{
 		Player1->FuckedUp();
 	}
@@ -69,7 +69,7 @@ void APlayerManager::P1_FuckedUp()
 
 void APlayerManager::P2_MoveRight()
 {
-	P2_VALID
+	if(Player2->IsValidLowLevel())
 	{
 		Player2->MoveRight();
 	}
@@ -77,7 +77,7 @@ void APlayerManager::P2_MoveRight()
 
 void APlayerManager::P2_MoveLeft()
 {
-	P2_VALID
+	if(Player2->IsValidLowLevel())
 	{
 		Player2->MoveLeft();
 	}
@@ -85,7 +85,7 @@ void APlayerManager::P2_MoveLeft()
 
 void APlayerManager::P2_PowerUp()
 {
-	P2_VALID
+	if(Player2->IsValidLowLevel())
 	{
 		Player2->PowerUp();
 	}
@@ -93,7 +93,7 @@ void APlayerManager::P2_PowerUp()
 
 void APlayerManager::P2_FuckedUp()
 {
-	P2_VALID
+	if(Player2->IsValidLowLevel())
 	{
 		Player2->FuckedUp();
 	}
