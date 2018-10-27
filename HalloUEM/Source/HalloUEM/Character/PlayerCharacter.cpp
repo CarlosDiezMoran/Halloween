@@ -1,12 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PlayerCharacter.h"
+#include "PowerUpsComponent.h"
 #include "Character/MovementPoints/PlayerMovementPoint.h"
 
 #define GRIDDISTANCE 100
 
 APlayerCharacter::APlayerCharacter() : Super()
 {
+	PowerUps = CreateDefaultSubobject<UPowerUpsComponent>(TEXT("PowerUps"));
+	AddOwnedComponent(PowerUps);
 }
 
 void APlayerCharacter::Die_Implementation()
@@ -50,6 +53,12 @@ void APlayerCharacter::StepForward()
 {
 }*/
 
+void APlayerCharacter::AddPowerUps(EnumPowerUpType NewPowerUp, EnumFuckUpType NewFuckUp)
+{
+	PowerUps->CurrentPowerUp = NewPowerUp;
+	PowerUps->CurrentFuckerUp = NewFuckUp;
+}
+
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -87,12 +96,12 @@ void APlayerCharacter::MoveRight_Implementation()
 		SetPlayerLocationByIndex(CurrentMovementPointIndex);
 	}
 }
-void APlayerCharacter::PowerUp_Implementation()
+void APlayerCharacter::PowerUp()
 {
-
+	PowerUps->UsePowerUp();
 }
-void APlayerCharacter::FuckedUp_Implementation()
+void APlayerCharacter::FuckedUp()
 {
-
+	PowerUps->UseFuckedUp();
 }
 

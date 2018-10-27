@@ -8,7 +8,7 @@
 #include "PlayerCharacter.generated.h"
 
 class APlayerMovementPoint;
-
+class UPowerUpsComponent;
 UCLASS()
 class HALLOUEM_API APlayerCharacter : public APaperCharacter
 {
@@ -23,9 +23,9 @@ public:
 	void MoveLeft();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 	void MoveRight();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
 	void PowerUp();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
+	UFUNCTION(BlueprintCallable, Category = "Tetric Function")
 	void FuckedUp();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Tetric Function")
 		void Die();
@@ -37,7 +37,8 @@ public:
 		void MakeInvulnerable(bool bHasBeenDamaged);
 	UFUNCTION(BlueprintCallable,BlueprintImplementableEvent)
 		void MakeVulnerable();
-
+	UFUNCTION(BlueprintCallable, Category = "Power Ups")
+		void AddPowerUps(EnumPowerUpType NewPowerUp, EnumFuckUpType	NewFuckUp);
 
 protected:
 	virtual void BeginPlay() override;
@@ -47,10 +48,8 @@ protected:
 
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PowerUp")
-		EnumPowerUpType CurrentPowerUp;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PowerUp")
-		EnumFuckUpType	CurrentFuckUpType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		UPowerUpsComponent* PowerUps;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 		TArray<APlayerMovementPoint*> MovementPoints;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
