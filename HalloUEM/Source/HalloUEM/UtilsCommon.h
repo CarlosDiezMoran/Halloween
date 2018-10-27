@@ -12,3 +12,19 @@ enum class EnumState : uint8 {
 	STANDARD,				//Standard movement
 	MENU
 };
+
+UENUM(BlueprintType)
+enum class EnumPowerUpType : uint8 {
+	NONE,
+	DASH,
+	SLOW,
+	SHOOT
+};
+
+enum class EnumFuckUpType : uint8 {
+	NONE,
+	SPEED,
+	GHOST,
+	BLIND
+};
+
