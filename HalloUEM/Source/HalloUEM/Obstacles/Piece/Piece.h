@@ -3,21 +3,32 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "GameFramework/Actor.h"
 #include "Piece.generated.h"
 
+class UPaperSpriteComponent;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class HALLOUEM_API UPiece : public UActorComponent
+UCLASS()
+class HALLOUEM_API APiece : public AActor
 {
 	GENERATED_BODY()
-
+	
 public:	
-	// Sets default values for this component's properties
-	UPiece();
+	// Sets default values for this actor's properties
+	APiece();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;	
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 	
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Piece")
+		UPaperSpriteComponent* Sprite;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Piece")
+		USceneComponent* MyRoot;
 };

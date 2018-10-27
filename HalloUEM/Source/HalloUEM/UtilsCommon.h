@@ -29,3 +29,12 @@ enum class EnumFuckUpType : uint8 {
 	BLIND
 };
 
+UENUM(BlueprintType)
+enum class EnumPieceType : uint8 {
+	NONE,
+	BLOCK,
+	T,
+	S,
+	STICK,
+	L
+};
