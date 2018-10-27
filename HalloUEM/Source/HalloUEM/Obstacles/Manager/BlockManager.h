@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "FLevelBlockManager.h"
+#include "Runtime/Engine/Public/TimerManager.h"
 #include "BlockManager.generated.h"
 
 class ABlock;
@@ -48,10 +49,6 @@ public:
 		TArray<ABlock*> CurrentSpawnedBlocks;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<TSubclassOf<ABlock>> CurrentBlockList;
-	/*
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
-		TArray<FLevelBlockManager> BlockList;
-		*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<TSubclassOf<ABlock>> BlockList_0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
@@ -68,6 +65,12 @@ public:
 		int32 NumberOfBlocksToPowerUp = 5;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		AActor* SpawningLocation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		float TimeToSpawnBlock = 3.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		float TimeToChangeLevel = 40.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		int32 MaxLevel = 4;
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -76,4 +79,8 @@ private:
 		int8 LevelModifier;
 	UPROPERTY(VisibleAnywhere)
 		int32 CurrentNumberOfBlocks = 0;
+		FTimerHandle TimerHandle;
+		FTimerDelegate TimerDel;
+		FTimerHandle TimerHandleLevel;
+		FTimerDelegate TimerDelLevel;
 };

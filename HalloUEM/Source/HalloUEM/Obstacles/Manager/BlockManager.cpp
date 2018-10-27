@@ -3,6 +3,7 @@
 #include "BlockManager.h"
 #include "UtilsCommon.h"
 #include "Obstacles/Block/Block.h"
+
 #include "Runtime/Engine/Classes/Engine/World.h"
 
 
@@ -21,7 +22,18 @@ void ABlockManager::BeginPlay()
 
 	//Le meto los blocks de level 0 al inicio
 	CurrentBlockList.Append(BlockList_0);
-	
+
+	//Timer Generacion Bloques
+	TimerDel.BindUFunction(this, FName("AddBlock"));
+	//Calling MyUsefulFunction after 5 seconds without looping
+	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
+
+	/*
+	//Timer Control Nivel
+	TimerDel.BindUFunction(this, FName("IncreaseLevel"));
+	//Calling MyUsefulFunction after 5 seconds without looping
+	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
+	*/
 }
 
 // Called every frame
@@ -33,7 +45,7 @@ void ABlockManager::Tick(float DeltaTime)
 	{
 		FVector CurrentLocation = Block->GetActorLocation();
 		CurrentLocation.X -= DeltaTime * BaseSpeed;
-		Block->SetActorLocation(CurrentLocation);
+		Block->SetActorLocation(CurrentLocation,true);
 	}
 }
 
@@ -56,8 +68,6 @@ void ABlockManager::AddBlock()
 		SelectedIndex = RandNumber;
 		//BlockList[CurrentLevel][SelectedIndex]
 
-
-		
 		if (NumCurrentSpawnedBlocks > 0) 
 		{
 			float Dist = CurrentSpawnedBlocks[CurrentSpawnedBlocks.Num() - 1]->GetDistanceTo(SpawningLocation);
