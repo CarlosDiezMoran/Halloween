@@ -5,6 +5,14 @@
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Public/TimerManager.h"
 
+
+UENUM(BlueprintType)
+enum class EnumState : uint8 {
+	NONE,					//Disabled
+	STANDARD,				//Standard movement
+	MENU
+};
+
 UENUM(BlueprintType)
 enum class EnumPowerUpType : uint8 {
 	NONE,
@@ -19,3 +27,4 @@ enum class EnumFuckUpType : uint8 {
 	GHOST,
 	BLIND
 };
+
