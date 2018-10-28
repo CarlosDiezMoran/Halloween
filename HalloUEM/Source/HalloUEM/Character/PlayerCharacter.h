@@ -43,7 +43,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void BlindOtherPlayer();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-
 		void CreatePowerUpWidget();
 protected:
 	virtual void BeginPlay() override;
