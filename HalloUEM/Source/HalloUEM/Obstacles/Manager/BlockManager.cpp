@@ -123,7 +123,11 @@ void ABlockManager::IncreaseLevel()
 	if (MaxLevel > CurrentLevel) 
 	{
 		BaseSpeed *= DifficultyMultiplier;
+		TimeToSpawnBlock /= DifficultyMultiplier;
 		CurrentLevel++;
+
+		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+		GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
 
 		switch (CurrentLevel)
 		{

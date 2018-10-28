@@ -68,7 +68,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		float TimeToSpawnBlock = 3.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
-		float TimeToChangeLevel = 40.f;
+		float TimeToChangeLevel = 300.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 MaxLevel = 4;
 
