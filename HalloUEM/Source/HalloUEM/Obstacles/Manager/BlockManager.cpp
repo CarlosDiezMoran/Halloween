@@ -38,7 +38,7 @@ void ABlockManager::BeginPlay()
   
   	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.Owner = this;
-	FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector * 50.f);
+	FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector * Offset);
 	FRotator Rotation(0.0f, 90.0f, -90.0f);
 	
 	ABackground* NewBackground1 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[0], Location, Rotation, SpawnInfo);
@@ -46,7 +46,7 @@ void ABlockManager::BeginPlay()
 	
 	FActorSpawnParameters SpawnInfo2;
 	SpawnInfo.Owner = this;
-	FVector Location2(SpawningLocation->GetActorLocation() + FVector::RightVector * 50.f);
+	FVector Location2(SpawningLocation->GetActorLocation() + FVector::RightVector * Offset);
 	FRotator Rotation2(0.0f, 90.0f, -90.0f);
 	ABackground* NewBackground2 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[1], Location2, Rotation2, SpawnInfo2);
 	FVector NewLoc = SpawningLocation->GetActorLocation();
@@ -57,7 +57,7 @@ void ABlockManager::BeginPlay()
 
 	FActorSpawnParameters SpawnInfo3;
 	SpawnInfo.Owner = this;
-	FVector Location3(SpawningLocation->GetActorLocation() + FVector::RightVector*50.f);
+	FVector Location3(SpawningLocation->GetActorLocation() + FVector::RightVector*Offset);
 	FRotator Rotation3(0.0f, 90.0f, -90.0f);
 	ABackground* NewBackground3 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[2], Location3, Rotation3, SpawnInfo3);
 	FVector NewLoc2 = SpawningLocation->GetActorLocation();

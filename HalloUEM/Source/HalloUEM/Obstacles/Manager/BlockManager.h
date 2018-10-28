@@ -81,6 +81,8 @@ public:
 		float TimeToChangeLevel = 300.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 MaxLevel = 4;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		float Offset = 0.f;
 
 private:
 	UPROPERTY(VisibleAnywhere)

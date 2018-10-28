@@ -23,6 +23,10 @@ public:
 	void UsePowerUp();
 	UFUNCTION(BlueprintCallable)
 	void UseFuckedUp();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void PlaySoundUsePowerUp();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void PlaySoundUseFuckedUp();
 
 protected:
 	// Called when the game starts

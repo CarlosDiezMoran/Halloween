@@ -34,6 +34,7 @@ void UPowerUpsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 void UPowerUpsComponent::UsePowerUp()
 {
+	Cast<APlayerCharacter>(GetOwner())->PlaySoundUsePowerUp();
 	switch (CurrentPowerUp)
 	{
 	case EnumPowerUpType::DASH:
@@ -50,6 +51,7 @@ void UPowerUpsComponent::UsePowerUp()
 
 void UPowerUpsComponent::UseFuckedUp()
 {
+	Cast<APlayerCharacter>(GetOwner())->PlaySoundUseFuckedUp();
 	switch (CurrentFuckerUp)
 	{
 	case EnumFuckUpType::SPEED:
