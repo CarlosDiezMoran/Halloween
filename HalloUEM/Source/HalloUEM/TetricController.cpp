@@ -234,6 +234,7 @@ void ATetricController::SetStandardState()
 
 void ATetricController::SetMenuState()
 {
+	/*
 	this->InputComponent->BindAction("P1_LEFT"		, EInputEvent::IE_Released, this, &ATetricController::MenuLeft);
 	this->InputComponent->BindAction("P1_RIGHT"		, EInputEvent::IE_Released, this, &ATetricController::MenuRight);
 	this->InputComponent->BindAction("P1_UP"		, EInputEvent::IE_Released, this, &ATetricController::MenuUp);
@@ -250,4 +251,5 @@ void ATetricController::SetMenuState()
 
 	this->InputComponent->BindAction("ACCEPT"		, EInputEvent::IE_Released, this, &ATetricController::MenuSelect);
 	this->InputComponent->BindAction("CANCEL"		, EInputEvent::IE_Released, this, &ATetricController::MenuCancel);
+	*/
 }
