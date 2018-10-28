@@ -57,6 +57,7 @@ void APlayerCharacter::AddPowerUps(EnumPowerUpType NewPowerUp, EnumFuckUpType Ne
 {
 	PowerUps->CurrentPowerUp = NewPowerUp;
 	PowerUps->CurrentFuckerUp = NewFuckUp;
+	CreatePowerUpWidget();
 }
 
 void APlayerCharacter::BeginPlay()
