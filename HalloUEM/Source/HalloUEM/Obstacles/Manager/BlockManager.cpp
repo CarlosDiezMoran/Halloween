@@ -3,6 +3,7 @@
 #include "BlockManager.h"
 #include "UtilsCommon.h"
 #include "Obstacles/Block/Block.h"
+#include "Background/Background.h"
 
 #include "Runtime/Engine/Classes/Engine/World.h"
 
@@ -31,6 +32,38 @@ void ABlockManager::BeginPlay()
 	//Timer Control Nivel
 	TimerDelLevel.BindUFunction(this, FName("IncreaseLevel"));
 	GetWorldTimerManager().SetTimer(TimerHandleLevel, TimerDelLevel, TimeToChangeLevel, true);
+
+	
+	FActorSpawnParameters SpawnInfo;
+	SpawnInfo.Owner = this;
+	FVector Location(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
+	FRotator Rotation(0.0f, 90.0f, -90.0f);
+
+	ABackground* NewBackground1 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[0], Location, Rotation, SpawnInfo);
+	SpawnedBackgroundBlocks.Add(NewBackground1);
+
+	FActorSpawnParameters SpawnInfo2;
+	SpawnInfo.Owner = this;
+	FVector Location2(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
+	FRotator Rotation2(0.0f, 90.0f, -90.0f);
+	ABackground* NewBackground2 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[1], Location2, Rotation2, SpawnInfo2);
+	FVector NewLoc = SpawningLocation->GetActorLocation();
+	NewLoc.X += 200 * 12;
+	NewLoc.Y = NewBackground2->GetActorLocation().Y;
+	NewBackground2->SetActorLocation(NewLoc);
+	SpawnedBackgroundBlocks.Add(NewBackground2);
+
+	FActorSpawnParameters SpawnInfo3;
+	SpawnInfo.Owner = this;
+	FVector Location3(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
+	FRotator Rotation3(0.0f, 90.0f, -90.0f);
+	ABackground* NewBackground3 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[2], Location3, Rotation3, SpawnInfo3);
+	FVector NewLoc2 = SpawningLocation->GetActorLocation();
+	NewLoc2.X += 200 * 24;
+	NewLoc2.Y = NewBackground3->GetActorLocation().Y;
+	NewBackground3->SetActorLocation(NewLoc2);
+	SpawnedBackgroundBlocks.Add(NewBackground3);
+	
 }
 
 // Called every frame
@@ -40,10 +73,22 @@ void ABlockManager::Tick(float DeltaTime)
 
 	for (ABlock* Block : CurrentSpawnedBlocks) 
 	{
-		FVector CurrentLocation = Block->GetActorLocation();
-		CurrentLocation.X -= DeltaTime * BaseSpeed;
-		Block->SetActorLocation(CurrentLocation,true);
+		if (Block->IsValidLowLevel()) 
+		{
+			FVector CurrentLocation = Block->GetActorLocation();
+			CurrentLocation.X -= DeltaTime * BaseSpeed;
+			Block->SetActorLocation(CurrentLocation, true);
+		}
 	}
+
+	
+	for (ABackground* Back : SpawnedBackgroundBlocks) 
+	{
+		FVector CurrentLocation = Back->GetActorLocation();
+		CurrentLocation.X -= DeltaTime * BaseSpeed / 2;
+		Back->SetActorLocation(CurrentLocation, true);
+	}
+	
 }
 
 void ABlockManager::DestroyBlock(ABlock * BlockToDestroy)
