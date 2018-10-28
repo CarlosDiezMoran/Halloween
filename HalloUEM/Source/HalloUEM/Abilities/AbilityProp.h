@@ -25,5 +25,6 @@ public:
 		EnumPowerUpType PowerUpType;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AbilityProp")
 		EnumFuckUpType	EnumFuckUpType;
-	
+	UPROPERTY(BlueprintReadWrite)
+		bool bHasToBeRemoved = false;
 };

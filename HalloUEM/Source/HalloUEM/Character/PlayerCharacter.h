@@ -9,6 +9,7 @@
 
 class APlayerMovementPoint;
 class UPowerUpsComponent;
+class ABlockManager;
 UCLASS()
 class HALLOUEM_API APlayerCharacter : public APaperCharacter
 {
@@ -62,4 +63,7 @@ public:
 		bool bIsInvulnerable = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
 		float TimeToBeVulnerableAgain = 1.5f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BlocksManager")
+		ABlockManager* BlockManager;
+
 };
