@@ -42,6 +42,9 @@ public:
 		void AddPowerUps(EnumPowerUpType NewPowerUp, EnumFuckUpType	NewFuckUp);
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void BlindOtherPlayer();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+
+		void CreatePowerUpWidget();
 protected:
 	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintCallable)

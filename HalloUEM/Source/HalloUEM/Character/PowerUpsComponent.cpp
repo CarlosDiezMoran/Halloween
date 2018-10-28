@@ -2,7 +2,7 @@
 
 #include "PowerUpsComponent.h"
 #include "PlayerCharacter.h"
-
+#include "Obstacles/Manager/BlockManager.h"
 // Sets default values for this component's properties
 UPowerUpsComponent::UPowerUpsComponent()
 {
@@ -30,6 +30,38 @@ void UPowerUpsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UPowerUpsComponent::UsePowerUp()
+{
+	switch (CurrentPowerUp)
+	{
+	case EnumPowerUpType::DASH:
+		PlayerCharacter->StepForward();
+		break;
+	case EnumPowerUpType::SLOW:
+		PlayerCharacter->BlockManager->UpdateSpeed(false, 7.f);
+	default:
+		break;
+	}
+	CurrentPowerUp = EnumPowerUpType::NONE;
+	CurrentFuckerUp = EnumFuckUpType::NONE;
+}
+
+void UPowerUpsComponent::UseFuckedUp()
+{
+	switch (CurrentFuckerUp)
+	{
+	case EnumFuckUpType::SPEED:
+		PlayerCharacter->OtherPlayer->BlockManager->UpdateSpeed(true, 6.f);		
+		break;
+	case EnumFuckUpType::BLIND:
+		PlayerCharacter->BlindOtherPlayer();
+	default:
+		break;
+	}
+	CurrentFuckerUp = EnumFuckUpType::NONE;
+	CurrentPowerUp = EnumPowerUpType::NONE;
 }
 
 

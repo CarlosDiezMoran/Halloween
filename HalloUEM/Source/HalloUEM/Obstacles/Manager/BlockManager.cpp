@@ -222,10 +222,10 @@ void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPrevious
 {
 	if(bIsIncreasing)
 	{
-		PowerupSpeedModifier = 100;
+		PowerupSpeedModifier = -100;
 	}else
 	{
-		PowerupSpeedModifier = -100;
+		PowerupSpeedModifier = 100;
 	}
 
 	if (GetWorld()->GetTimerManager().IsTimerActive(PowerupSpeedHandle))
@@ -243,7 +243,7 @@ void ABlockManager::IncreaseLevel()
 	if (MaxLevel > CurrentLevel) 
 	{
 		CurrentSpeed += SpeedLevelIncrease;
-		CurrentTimeToSpawn -= 0.5f;
+		CurrentTimeToSpawn -= 0.33f;
 		CurrentLevel++;
 
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
