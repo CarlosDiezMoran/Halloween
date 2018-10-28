@@ -80,18 +80,12 @@ void ABlockManager::Tick(float DeltaTime)
 
 	for (ABlock* Block : CurrentSpawnedBlocks) 
 	{
-
-		FVector CurrentLocation = Block->GetActorLocation();
-		CurrentLocation.X -= DeltaTime * (CurrentSpeed + PowerupSpeedModifier);
-		Block->SetActorLocation(CurrentLocation,true);
-
-		if (Block->IsValidLowLevel()) 
+		if (Block->IsValidLowLevel())
 		{
 			FVector CurrentLocation = Block->GetActorLocation();
-			CurrentLocation.X -= DeltaTime * BaseSpeed;
+			CurrentLocation.X -= DeltaTime * (CurrentSpeed + PowerupSpeedModifier);
 			Block->SetActorLocation(CurrentLocation, true);
 		}
-
 	}
 	int32 IndexToBeRemoved = -1;
 	uint32 Counter = 0;
@@ -249,7 +243,7 @@ void ABlockManager::IncreaseLevel()
 	if (MaxLevel > CurrentLevel) 
 	{
 		CurrentSpeed += SpeedLevelIncrease;
-		CurrentTimeToSpawn = CurrentSpeed * TimeToSpawnBlock / BaseSpeed;
+		CurrentTimeToSpawn -= 0.5f;
 		CurrentLevel++;
 
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);

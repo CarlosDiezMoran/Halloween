@@ -70,7 +70,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<ABackground*> SpawnedBackgroundBlocks;    
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
-		int32 SpeedLevelIncrease = 100;
+		int32 SpeedLevelIncrease = -100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 NumberOfBlocksToPowerUp = 5;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
@@ -92,7 +92,7 @@ private:
 
 
 	int32 CurrentSpeed;
-	int32 CurrentTimeToSpawn;
+	float CurrentTimeToSpawn;
 	int32 PowerupSpeedModifier;
 	FTimerHandle PowerupSpeedHandle;
 
