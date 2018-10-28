@@ -34,34 +34,34 @@ void ABlockManager::BeginPlay()
 	GetWorldTimerManager().SetTimer(TimerHandleLevel, TimerDelLevel, TimeToChangeLevel, true);
 	
 	FActorSpawnParameters SpawnInfo;
-38		SpawnInfo.Owner = this;
-39		FVector Location(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
-40		FRotator Rotation(0.0f, 90.0f, -90.0f);
-41	
-42		ABackground* NewBackground1 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[0], Location, Rotation, SpawnInfo);
-43		SpawnedBackgroundBlocks.Add(NewBackground1);
-44	
-45		FActorSpawnParameters SpawnInfo2;
-46		SpawnInfo.Owner = this;
-47		FVector Location2(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
-48		FRotator Rotation2(0.0f, 90.0f, -90.0f);
-49		ABackground* NewBackground2 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[1], Location2, Rotation2, SpawnInfo2);
-50		FVector NewLoc = SpawningLocation->GetActorLocation();
-51		NewLoc.X += 200 * 12;
-52		NewLoc.Y = NewBackground2->GetActorLocation().Y;
-53		NewBackground2->SetActorLocation(NewLoc);
-54		SpawnedBackgroundBlocks.Add(NewBackground2);
-55	
-56		FActorSpawnParameters SpawnInfo3;
-57		SpawnInfo.Owner = this;
-58		FVector Location3(SpawningLocation->GetActorLocation() - FVector::RightVector*50.f);
-59		FRotator Rotation3(0.0f, 90.0f, -90.0f);
-60		ABackground* NewBackground3 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[2], Location3, Rotation3, SpawnInfo3);
-61		FVector NewLoc2 = SpawningLocation->GetActorLocation();
-62		NewLoc2.X += 200 * 24;
-63		NewLoc2.Y = NewBackground3->GetActorLocation().Y;
-64		NewBackground3->SetActorLocation(NewLoc2);
-65		SpawnedBackgroundBlocks.Add(NewBackground3);
+	SpawnInfo.Owner = this;
+	FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector * 50.f);
+	FRotator Rotation(0.0f, 90.0f, -90.0f);
+	
+	ABackground* NewBackground1 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[0], Location, Rotation, SpawnInfo);
+	SpawnedBackgroundBlocks.Add(NewBackground1);
+	
+	FActorSpawnParameters SpawnInfo2;
+	SpawnInfo.Owner = this;
+	FVector Location2(SpawningLocation->GetActorLocation() + FVector::RightVector * 50.f);
+	FRotator Rotation2(0.0f, 90.0f, -90.0f);
+	ABackground* NewBackground2 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[1], Location2, Rotation2, SpawnInfo2);
+	FVector NewLoc = SpawningLocation->GetActorLocation();
+	NewLoc.X += 200 * 12;
+	NewLoc.Y = NewBackground2->GetActorLocation().Y;
+	NewBackground2->SetActorLocation(NewLoc);
+	SpawnedBackgroundBlocks.Add(NewBackground2);
+
+	FActorSpawnParameters SpawnInfo3;
+	SpawnInfo.Owner = this;
+	FVector Location3(SpawningLocation->GetActorLocation() + FVector::RightVector*50.f);
+	FRotator Rotation3(0.0f, 90.0f, -90.0f);
+	ABackground* NewBackground3 = GetWorld()->SpawnActor<ABackground>(BackgroundBlocks[2], Location3, Rotation3, SpawnInfo3);
+	FVector NewLoc2 = SpawningLocation->GetActorLocation();
+	NewLoc2.X += 200 * 24;
+	NewLoc2.Y = NewBackground3->GetActorLocation().Y;
+	NewBackground3->SetActorLocation(NewLoc2);
+	SpawnedBackgroundBlocks.Add(NewBackground3);
 }
 
 // Called every frame
@@ -71,9 +71,12 @@ void ABlockManager::Tick(float DeltaTime)
 
 	for (ABlock* Block : CurrentSpawnedBlocks) 
 	{
-		FVector CurrentLocation = Block->GetActorLocation();
-		CurrentLocation.X -= DeltaTime * BaseSpeed;
-		Block->SetActorLocation(CurrentLocation,true);
+		if (Block->IsValidLowLevel()) 
+		{
+			FVector CurrentLocation = Block->GetActorLocation();
+			CurrentLocation.X -= DeltaTime * BaseSpeed;
+			Block->SetActorLocation(CurrentLocation, true);
+		}
 	}
 	int32 IndexToBeRemoved = -1;
 	uint32 Counter = 0;
