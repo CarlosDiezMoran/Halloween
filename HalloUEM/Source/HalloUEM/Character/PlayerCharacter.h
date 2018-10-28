@@ -40,7 +40,8 @@ public:
 		void MakeVulnerable();
 	UFUNCTION(BlueprintCallable, Category = "Power Ups")
 		void AddPowerUps(EnumPowerUpType NewPowerUp, EnumFuckUpType	NewFuckUp);
-
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void BlindOtherPlayer();
 protected:
 	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintCallable)
@@ -65,5 +66,6 @@ public:
 		float TimeToBeVulnerableAgain = 1.5f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BlocksManager")
 		ABlockManager* BlockManager;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OtherPlayer")
+		APlayerCharacter* OtherPlayer;
 };

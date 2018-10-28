@@ -18,15 +18,13 @@ UENUM(BlueprintType)
 enum class EnumPowerUpType : uint8 {
 	NONE,
 	DASH,
-	SLOW,
-	SHOOT
+	SLOW
 };
 
 UENUM(BlueprintType)
 enum class EnumFuckUpType : uint8 {
 	NONE,
 	SPEED,
-	GHOST,
 	BLIND
 };
 
