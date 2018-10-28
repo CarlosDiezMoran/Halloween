@@ -3,7 +3,7 @@
 #include "BlockManager.h"
 #include "UtilsCommon.h"
 #include "Obstacles/Block/Block.h"
-
+#include "Abilities/AbilityProp.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
 
 
@@ -43,6 +43,31 @@ void ABlockManager::Tick(float DeltaTime)
 		FVector CurrentLocation = Block->GetActorLocation();
 		CurrentLocation.X -= DeltaTime * BaseSpeed;
 		Block->SetActorLocation(CurrentLocation,true);
+	}
+	int32 IndexToBeRemoved = -1;
+	uint32 Counter = 0;
+	for (AAbilityProp* AbilityProp : AbilityProps)
+	{
+		if (AbilityProp->IsValidLowLevel())
+		{
+			if(AbilityProp->bHasToBeRemoved)
+			{
+				IndexToBeRemoved = Counter;
+			}
+			else
+			{
+				Counter++;
+				FVector CurrentLocation = AbilityProp->GetActorLocation();
+				CurrentLocation.X -= DeltaTime * BaseSpeed;
+				AbilityProp->SetActorLocation(CurrentLocation, true);
+			}
+		}
+	}
+	if(AbilityProps.IsValidIndex(IndexToBeRemoved))
+	{
+		AAbilityProp* Ability = AbilityProps[IndexToBeRemoved];
+		AbilityProps.RemoveAt(IndexToBeRemoved);
+		Ability->Destroy();
 	}
 }
 
@@ -89,11 +114,46 @@ void ABlockManager::AddBlock()
 
 			FActorSpawnParameters SpawnInfo;
 			SpawnInfo.Owner = this;
-			FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector*50.f);
-			FRotator Rotation(0.0f, 90.0f, -90.0f);
+			if(SpawningLocation->IsValidLowLevel())
+			{
+				FVector Location(SpawningLocation->GetActorLocation() + FVector::RightVector*50.f);
+				FRotator Rotation(0.0f, 90.0f, -90.0f);
 
-			ABlock* NewBlock = GetWorld()->SpawnActor<ABlock>(CurrentBlockList[SelectedIndex], Location, Rotation, SpawnInfo);
-			CurrentSpawnedBlocks.Add(NewBlock);
+				ABlock* NewBlock = GetWorld()->SpawnActor<ABlock>(CurrentBlockList[SelectedIndex], Location, Rotation, SpawnInfo);
+				CurrentSpawnedBlocks.Add(NewBlock);
+
+				++CurrentNumberOfBlocksWithoutPowerUp;
+				if (CurrentNumberOfBlocksWithoutPowerUp > NumberOfBlocksToPowerUp)
+				{
+					CurrentNumberOfBlocksWithoutPowerUp = 0;
+					TArray<FVector2D> PowerUpPositions;
+					uint8 Counter = 0;
+					if (FMath::RandBool())
+					{
+						for (bool Tile : NewBlock->Entrances)
+						{
+							if (Tile)
+							{
+								PowerUpPositions.Add(FVector2D(0.f, Counter*100));
+							}
+							Counter++;
+						}
+					}
+					else
+					{
+						for (bool Tile : NewBlock->Exits)
+						{
+							if (Tile)
+							{
+								PowerUpPositions.Add(FVector2D(-400.f, Counter*100));
+							}
+							Counter++;
+						}
+					}
+
+					SpawnPowerupProp(Location, PowerUpPositions[FMath::RandRange(0, PowerUpPositions.Num() - 1)]);
+				}
+			}
 		}
 	}
 

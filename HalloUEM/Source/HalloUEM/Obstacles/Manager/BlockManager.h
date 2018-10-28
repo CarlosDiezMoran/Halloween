@@ -9,7 +9,7 @@
 #include "BlockManager.generated.h"
 
 class ABlock;
-
+class AAbilityProp;
 UCLASS()
 class HALLOUEM_API ABlockManager : public AActor
 {
@@ -31,12 +31,16 @@ public:
 	void UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPreviousSpeed = 0.f);
 	UFUNCTION(BlueprintCallable)
 		void IncreaseLevel();
+	UFUNCTION(BlueprintImplementableEvent)
+		void SpawnPowerupProp(FVector BasePosition, FVector2D DeltaPosition);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilityProps")
+		TArray<AAbilityProp*>AbilityProps;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Blocks")
 		TArray<ABlock*> AllBlocks;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
@@ -78,7 +82,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 		int8 LevelModifier;
 	UPROPERTY(VisibleAnywhere)
-		int32 CurrentNumberOfBlocks = 0;
+		int32 CurrentNumberOfBlocksWithoutPowerUp = 0;
 		FTimerHandle TimerHandle;
 		FTimerDelegate TimerDel;
 		FTimerHandle TimerHandleLevel;
