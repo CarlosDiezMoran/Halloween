@@ -38,7 +38,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	UFUNCTION()
+		void RemoveSpeedModifier();
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilityProps")
 		TArray<AAbilityProp*>AbilityProps;
@@ -69,7 +70,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<ABackground*> SpawnedBackgroundBlocks;    
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
-		int32 DifficultyMultiplier = 2;
+		int32 SpeedLevelIncrease = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 NumberOfBlocksToPowerUp = 5;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
@@ -88,8 +89,18 @@ private:
 		int8 LevelModifier;
 	UPROPERTY(VisibleAnywhere)
 		int32 CurrentNumberOfBlocksWithoutPowerUp = 0;
-		FTimerHandle TimerHandle;
-		FTimerDelegate TimerDel;
-		FTimerHandle TimerHandleLevel;
-		FTimerDelegate TimerDelLevel;
+
+
+	int32 CurrentSpeed;
+	int32 CurrentTimeToSpawn;
+	int32 PowerupSpeedModifier;
+	FTimerHandle PowerupSpeedHandle;
+
+	FTimerHandle TimerHandle;
+	FTimerDelegate TimerDel;
+	FTimerDelegate TimerDelLevel;
+	FTimerHandle TimerHandleLevel;
+
+
+
 };
