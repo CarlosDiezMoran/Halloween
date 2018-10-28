@@ -10,6 +10,7 @@
 
 class ABlock;
 class AAbilityProp;
+class ABackground;
 UCLASS()
 class HALLOUEM_API ABlockManager : public AActor
 {
@@ -64,6 +65,10 @@ public:
 		TArray<TSubclassOf<ABlock>> BlockList_3;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		TArray<TSubclassOf<ABlock>> BlockList_4;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<TSubclassOf<ABackground>> BackgroundBlocks;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
+		TArray<ABackground*> SpawnedBackgroundBlocks;    
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
 		int32 SpeedLevelIncrease = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Blocks")
