@@ -31,6 +31,14 @@ void ABlockManager::BeginPlay()
 	//Timer Control Nivel
 	TimerDelLevel.BindUFunction(this, FName("IncreaseLevel"));
 	GetWorldTimerManager().SetTimer(TimerHandleLevel, TimerDelLevel, TimeToChangeLevel, true);
+
+	CurrentSpeed = BaseSpeed;
+	CurrentTimeToSpawn = TimeToSpawnBlock;
+}
+
+void ABlockManager::RemoveSpeedModifier()
+{
+	PowerupSpeedModifier = 0;
 }
 
 // Called every frame
@@ -41,7 +49,7 @@ void ABlockManager::Tick(float DeltaTime)
 	for (ABlock* Block : CurrentSpawnedBlocks) 
 	{
 		FVector CurrentLocation = Block->GetActorLocation();
-		CurrentLocation.X -= DeltaTime * BaseSpeed;
+		CurrentLocation.X -= DeltaTime * (CurrentSpeed + PowerupSpeedModifier);
 		Block->SetActorLocation(CurrentLocation,true);
 	}
 	int32 IndexToBeRemoved = -1;
@@ -58,7 +66,7 @@ void ABlockManager::Tick(float DeltaTime)
 			{
 				Counter++;
 				FVector CurrentLocation = AbilityProp->GetActorLocation();
-				CurrentLocation.X -= DeltaTime * BaseSpeed;
+				CurrentLocation.X -= DeltaTime * (CurrentSpeed + PowerupSpeedModifier);
 				AbilityProp->SetActorLocation(CurrentLocation, true);
 			}
 		}
@@ -170,24 +178,34 @@ void ABlockManager::AddBlock()
 
 void ABlockManager::UpdateSpeed(bool bIsIncreasing, float TimeToReturnToPreviousSpeed)
 {
-	//if is increasing
-	//++levelmodifier
-	//else
-	//--
-	//set new speed
-	//set timer if time != 0
+	if(bIsIncreasing)
+	{
+		PowerupSpeedModifier = 100;
+	}else
+	{
+		PowerupSpeedModifier = -100;
+	}
+
+	if (GetWorld()->GetTimerManager().IsTimerActive(PowerupSpeedHandle))
+	{
+		GetWorld()->GetTimerManager().ClearTimer(PowerupSpeedHandle);
+	}
+	FTimerDelegate Delegate;
+	Delegate.BindUFunction(this, FName("RemoveSpeedModifier"));
+	GetWorld()->GetTimerManager().SetTimer(PowerupSpeedHandle, Delegate, TimeToReturnToPreviousSpeed, false);
+
 }
 
 void ABlockManager::IncreaseLevel()
 {
 	if (MaxLevel > CurrentLevel) 
 	{
-		BaseSpeed *= DifficultyMultiplier;
-		TimeToSpawnBlock /= DifficultyMultiplier;
+		CurrentSpeed += SpeedLevelIncrease;
+		CurrentTimeToSpawn = CurrentSpeed * TimeToSpawnBlock / BaseSpeed;
 		CurrentLevel++;
 
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-		GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, TimeToSpawnBlock, true);
+		GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, CurrentTimeToSpawn, true);
 
 		switch (CurrentLevel)
 		{
